@@ -10,7 +10,7 @@ Both are proved for every field extension L/K with |K| = 4 and [L : K] = 6 (resp
 
 ## The archive and its hash
 
-`mu4-lean-cert.tar` is the archive whose SHA-256 was posted publicly on 2026-11-06:
+`mu4-lean-cert.tar` is the archive whose SHA-256 was posted publicly on 2026-11-06 (https://x.com/mathbbA/status/2118814683062730872):
 
 ```
 58e138356aba88aa5af1763aa1aa0d6a506cab0c9024b812d1f6498745accd51  mu4-lean-cert.tar
