@@ -1,0 +1,48 @@
+name = "Mu4"
+defaultTargets = ["Mu4Comp", "Mu4Geom", "Mu4Comp5", "Mu4"]
+
+# Portable (11-06): one git dependency, Mathlib at tag v4.28.0. lake-manifest.json pins it and every transitive
+# package to an exact commit (mathlib 8f9d9cff6bd728b17a24e163c9402775d9e6a365); see README.md, "Build".
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.28.0"
+
+# Computational code (core Lean only, no Mathlib import), compiled to native code so that
+# `native_decide` in the Mu4 library runs it at native speed.
+[[lean_lib]]
+name = "Mu4Comp"
+precompileModules = true
+
+# The G1 search (core Lean only), compiled to native code like Mu4Comp. A library of its own, so that
+# adding it did not change libMu4_Mu4Comp.so, whose hash is in the traces of the C3 check modules.
+[[lean_lib]]
+name = "Mu4Geom"
+precompileModules = true
+
+# The mu_4(5) search (core Lean only), compiled to native code. A library of its own, so that the shared library of
+# Mu4Comp, whose hash is in the traces of the C3 check modules, stays unchanged.
+[[lean_lib]]
+name = "Mu4Comp5"
+precompileModules = true
+
+# Definitions, theorems and proofs (imports Mathlib, Mu4Comp and Mu4Geom).
+[[lean_lib]]
+name = "Mu4"
+
+# Driver for timing and cross-checking the search against runs/hyper/final/hp2 (not part of the proof).
+[[lean_exe]]
+name = "mu4search"
+root = "SearchMain"
+
+[[lean_exe]]
+name = "mu4prof"
+root = "ProfMain"
+
+[[lean_exe]]
+name = "mu4check"
+root = "CheckMain"
+
+[[lean_exe]]
+name = "mu4search5"
+root = "Search5Main"
